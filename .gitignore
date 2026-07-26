@@ -1,0 +1,31 @@
+# Maven
+target/
+*.iml
+.idea/
+.vscode/
+*.class
+
+# 本地配置与密钥（绝不提交）
+application.yml
+application-local.yml
+.env
+*.key
+**/secrets*
+
+# 运行日志与评测输出（含本地绝对路径，勿提交）
+*.log
+aida8082.log
+diag.log
+run.log
+eval_run*.log
+diag_resp*.json
+req*.json
+dep_tree.txt
+docs/*.txt
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 工具私有内存（含对话记录，勿上传）
+.workbuddy/

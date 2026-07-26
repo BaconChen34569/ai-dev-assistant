@@ -1,0 +1,44 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: ai-dev-assistant
+
+  # ============ 大模型（智谱 BigModel，OpenAI 兼容端点） ============
+  # 智谱同时提供对话（glm-4 系列）与 embedding（embedding-3），同源。
+  # api-key 一律用环境变量注入，切勿把真实 Key 写进文件或提交仓库。
+  ai:
+    openai:
+      base-url: ${LLM_BASE_URL:https://open.bigmodel.cn/api/paas/v4}
+      api-key: ${LLM_API_KEY:YOUR_ZHIPU_API_KEY}
+      chat:
+        options:
+          model: ${LLM_CHAT_MODEL:glm-4-flash}
+      # 向量嵌入模型（用于 RAG 检索），与 chat 同源。
+      embedding:
+        enabled: true
+        base-url: ${EMB_BASE_URL:${LLM_BASE_URL:https://open.bigmodel.cn/api/paas/v4}}
+        api-key: ${EMB_API_KEY:${LLM_API_KEY:YOUR_ZHIPU_API_KEY}}
+        options:
+          model: ${EMB_MODEL:embedding-3}
+
+  # ============ Redis（Linux 服务器，存 embedding 向量） ============
+  # embedding 以普通数据存于此 Redis，余弦相似度在应用层计算（任意版本可用）。
+  data:
+    redis:
+      host: ${REDIS_HOST:192.168.100.128}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      database: 2          # RAG 向量数据存于 db2（任意 Redis 版本均可）
+
+# ============ 应用自定义配置 ============
+aida:
+  rag:
+    top-k: 5            # 检索召回的代码片段数量
+    chunk-strategy: method  # 代码分片粒度：method（方法级）
+    codebase-path: ""     # 启动即索引的本地代码目录（留空则不自动索引）
+  tools:
+    sandbox-base: ""     # 本地文件工具的根目录（留空则用程序工作目录）
+  diagnose:
+    max-rounds: 6       # 单次诊断最大工具调用轮次

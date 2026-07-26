@@ -1,0 +1,402 @@
+[
+  {
+    "id": "npe-01",
+    "category": "NullPointerException",
+    "trace": "java.lang.NullPointerException: Cannot invoke \"com.demo.User.getName()\" because \"u\" is null\n\tat com.demo.UserService.process(UserService.java:42)\n\tat com.demo.UserController.handle(UserController.java:18)",
+    "expectException": "NullPointerException",
+    "expectContains": ["NullPointerException", "空指针", "null"],
+    "expectFrame": "UserService.java:42"
+  },
+  {
+    "id": "npe-02",
+    "category": "NullPointerException",
+    "trace": "java.lang.NullPointerException: Cannot read field \"id\" because \"order\" is null\n\tat com.shop.OrderService.calculate(OrderService.java:88)\n\tat com.shop.CheckoutRunner.run(CheckoutRunner.java:23)",
+    "expectException": "NullPointerException",
+    "expectContains": ["NullPointerException", "空指针", "null"],
+    "expectFrame": "OrderService.java:88"
+  },
+  {
+    "id": "npe-03",
+    "category": "NullPointerException",
+    "trace": "java.lang.NullPointerException\n\tat java.base/java.util.Objects.requireNonNull(Objects.java:259)\n\tat com.data.Pipeline.validate(Pipeline.java:54)\n\tat com.data.Pipeline.start(Pipeline.java:31)",
+    "expectException": "NullPointerException",
+    "expectContains": ["NullPointerException", "空指针", "null"],
+    "expectFrame": "Pipeline.java:54"
+  },
+  {
+    "id": "npe-04",
+    "category": "NullPointerException",
+    "trace": "java.lang.NullPointerException: Cannot invoke \"java.lang.String.length()\" because the return value of \"getConfig()\" is null\n\tat com.cfg.AppConfig.resolve(AppConfig.java:120)\n\tat com.cfg.Bootstrap.init(Bootstrap.java:12)",
+    "expectException": "NullPointerException",
+    "expectContains": ["NullPointerException", "空指针", "null"],
+    "expectFrame": "AppConfig.java:120"
+  },
+  {
+    "id": "npe-05",
+    "category": "NullPointerException",
+    "trace": "java.lang.NullPointerException: Cannot read field \"value\" because \"node\" is null\n\tat com.tree.BinaryTree.find(BinaryTree.java:67)\n\tat com.tree.TreeTest.main(TreeTest.java:9)",
+    "expectException": "NullPointerException",
+    "expectContains": ["NullPointerException", "空指针", "null"],
+    "expectFrame": "BinaryTree.java:67"
+  },
+  {
+    "id": "npe-06",
+    "category": "NullPointerException",
+    "trace": "java.lang.NullPointerException: Cannot invoke \"com.demo.Cache.get(Object)\" because \"this.cache\" is null\n\tat com.demo.Repository.lookup(Repository.java:33)\n\tat com.demo.Repository.save(Repository.java:41)",
+    "expectException": "NullPointerException",
+    "expectContains": ["NullPointerException", "空指针", "null"],
+    "expectFrame": "Repository.java:33"
+  },
+  {
+    "id": "npe-07",
+    "category": "NullPointerException",
+    "trace": "java.lang.NullPointerException: Cannot invoke \"java.util.List.size()\" because \"items\" is null\n\tat com.cart.Cart.total(Cart.java:75)\n\tat com.cart.Cart.checkout(Cart.java:90)",
+    "expectException": "NullPointerException",
+    "expectContains": ["NullPointerException", "空指针", "null"],
+    "expectFrame": "Cart.java:75"
+  },
+  {
+    "id": "npe-08",
+    "category": "NullPointerException",
+    "trace": "java.lang.NullPointerException: Cannot invoke \"com.demo.Session.getAttribute(String)\" because \"session\" is null\n\tat com.web.AuthFilter.doFilter(AuthFilter.java:56)\n\tat com.web.Chain.run(Chain.java:14)",
+    "expectException": "NullPointerException",
+    "expectContains": ["NullPointerException", "空指针", "null"],
+    "expectFrame": "AuthFilter.java:56"
+  },
+  {
+    "id": "aioob-01",
+    "category": "ArrayIndexOutOfBoundsException",
+    "trace": "java.lang.ArrayIndexOutOfBoundsException: Index 5 out of bounds for length 5\n\tat com.util.Matrix.get(Matrix.java:30)\n\tat com.util.MatrixTest.run(MatrixTest.java:11)",
+    "expectException": "ArrayIndexOutOfBoundsException",
+    "expectContains": ["ArrayIndexOutOfBoundsException", "下标", "越界"],
+    "expectFrame": "Matrix.java:30"
+  },
+  {
+    "id": "aioob-02",
+    "category": "ArrayIndexOutOfBoundsException",
+    "trace": "java.lang.ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 3\n\tat com.list.IntList.remove(IntList.java:48)\n\tat com.list.IntListTest.main(IntListTest.java:7)",
+    "expectException": "ArrayIndexOutOfBoundsException",
+    "expectContains": ["ArrayIndexOutOfBoundsException", "下标", "越界"],
+    "expectFrame": "IntList.java:48"
+  },
+  {
+    "id": "aioob-03",
+    "category": "ArrayIndexOutOfBoundsException",
+    "trace": "java.lang.ArrayIndexOutOfBoundsException: 10\n\tat com.parse.RecordParser.parse(RecordParser.java:22)\n\tat com.parse.Batch.main(Batch.java:40)",
+    "expectException": "ArrayIndexOutOfBoundsException",
+    "expectContains": ["ArrayIndexOutOfBoundsException", "下标", "越界"],
+    "expectFrame": "RecordParser.java:22"
+  },
+  {
+    "id": "aioob-04",
+    "category": "ArrayIndexOutOfBoundsException",
+    "trace": "java.lang.ArrayIndexOutOfBoundsException: Index 0 out of bounds for length 0\n\tat com.collect.RingBuffer.next(RingBuffer.java:19)\n\tat com.collect.RingBufferTest.tick(RingBufferTest.java:8)",
+    "expectException": "ArrayIndexOutOfBoundsException",
+    "expectContains": ["ArrayIndexOutOfBoundsException", "下标", "越界"],
+    "expectFrame": "RingBuffer.java:19"
+  },
+  {
+    "id": "cce-01",
+    "category": "ClassCastException",
+    "trace": "java.lang.ClassCastException: class com.demo.Dog cannot be cast to class com.demo.Cat\n\tat com.demo.Zoo.feed(Zoo.java:44)\n\tat com.demo.Zoo.main(Zoo.java:9)",
+    "expectException": "ClassCastException",
+    "expectContains": ["ClassCastException", "类型转换", "转换"],
+    "expectFrame": "Zoo.java:44"
+  },
+  {
+    "id": "cce-02",
+    "category": "ClassCastException",
+    "trace": "java.lang.ClassCastException: java.lang.Integer cannot be cast to java.lang.String\n\tat com.cfg.MapReader.read(MapReader.java:61)\n\tat com.cfg.MapReader.load(MapReader.java:15)",
+    "expectException": "ClassCastException",
+    "expectContains": ["ClassCastException", "类型转换", "转换"],
+    "expectFrame": "MapReader.java:61"
+  },
+  {
+    "id": "cce-03",
+    "category": "ClassCastException",
+    "trace": "java.lang.ClassCastException: class java.util.HashMap cannot be cast to class java.util.List\n\tat com.json.NodeFlattener.flatten(NodeFlattener.java:27)\n\tat com.json.NodeFlattenerTest.run(NodeFlattenerTest.java:6)",
+    "expectException": "ClassCastException",
+    "expectContains": ["ClassCastException", "类型转换", "转换"],
+    "expectFrame": "NodeFlattener.java:27"
+  },
+  {
+    "id": "iae-01",
+    "category": "IllegalArgumentException",
+    "trace": "java.lang.IllegalArgumentException: width must be positive\n\tat com.geom.Rectangle.<init>(Rectangle.java:14)\n\tat com.geom.ShapeFactory.make(ShapeFactory.java:33)",
+    "expectException": "IllegalArgumentException",
+    "expectContains": ["IllegalArgumentException", "参数", "非法"],
+    "expectFrame": "Rectangle.java:14"
+  },
+  {
+    "id": "iae-02",
+    "category": "IllegalArgumentException",
+    "trace": "java.lang.IllegalArgumentException: invalid timezone: XYZ\n\tat com.time.Clock.parse(Clock.java:52)\n\tat com.time.Clock.main(Clock.java:10)",
+    "expectException": "IllegalArgumentException",
+    "expectContains": ["IllegalArgumentException", "参数", "非法"],
+    "expectFrame": "Clock.java:52"
+  },
+  {
+    "id": "iae-03",
+    "category": "IllegalArgumentException",
+    "trace": "java.lang.IllegalArgumentException: requirement failed: capacity < 0\n\tat com.pool.Pool.<init>(Pool.java:21)\n\tat com.pool.PoolTest.setup(PoolTest.java:8)",
+    "expectException": "IllegalArgumentException",
+    "expectContains": ["IllegalArgumentException", "参数", "非法"],
+    "expectFrame": "Pool.java:21"
+  },
+  {
+    "id": "iae-04",
+    "category": "IllegalArgumentException",
+    "trace": "java.lang.IllegalArgumentException: Rate must be between 0 and 1\n\tat com.finance.Interest.compute(Interest.java:39)\n\tat com.finance.InterestTest.main(InterestTest.java:12)",
+    "expectException": "IllegalArgumentException",
+    "expectContains": ["IllegalArgumentException", "参数", "非法"],
+    "expectFrame": "Interest.java:39"
+  },
+  {
+    "id": "nfe-01",
+    "category": "NumberFormatException",
+    "trace": "java.lang.NumberFormatException: For input string: \"abc\"\n\tat java.base/java.lang.Integer.parseInt(Integer.java:652)\n\tat com.cli.Args.port(Args.java:27)\n\tat com.cli.Args.main(Args.java:9)",
+    "expectException": "NumberFormatException",
+    "expectContains": ["NumberFormatException", "格式", "数字"],
+    "expectFrame": "Args.java:27"
+  },
+  {
+    "id": "nfe-02",
+    "category": "NumberFormatException",
+    "trace": "java.lang.NumberFormatException: For input string: \"\"\n\tat java.base/java.lang.Long.parseLong(Long.java:743)\n\tat com.data.IdCodec.decode(IdCodec.java:18)\n\tat com.data.IdCodecTest.main(IdCodecTest.java:7)",
+    "expectException": "NumberFormatException",
+    "expectContains": ["NumberFormatException", "格式", "数字"],
+    "expectFrame": "IdCodec.java:18"
+  },
+  {
+    "id": "nfe-03",
+    "category": "NumberFormatException",
+    "trace": "java.lang.NumberFormatException: For input string: \"12.5\"\n\tat java.base/java.lang.Integer.parseInt(Integer.java:460)\n\tat com.cfg.PortParser.parse(PortParser.java:44)\n\tat com.cfg.PortParserTest.run(PortParserTest.java:5)",
+    "expectException": "NumberFormatException",
+    "expectContains": ["NumberFormatException", "格式", "数字"],
+    "expectFrame": "PortParser.java:44"
+  },
+  {
+    "id": "ise-01",
+    "category": "IllegalStateException",
+    "trace": "java.lang.IllegalStateException: EntityManager is closed\n\tat com.orm.Session.query(Session.java:71)\n\tat com.orm.Repository.find(Repository.java:25)",
+    "expectException": "IllegalStateException",
+    "expectContains": ["IllegalStateException", "状态", "非法状态"],
+    "expectFrame": "Session.java:71"
+  },
+  {
+    "id": "ise-02",
+    "category": "IllegalStateException",
+    "trace": "java.lang.IllegalStateException: expected a single result but found 3\n\tat com.repo.Query.one(Query.java:58)\n\tat com.repo.QueryTest.main(QueryTest.java:10)",
+    "expectException": "IllegalStateException",
+    "expectContains": ["IllegalStateException", "状态", "非法状态"],
+    "expectFrame": "Query.java:58"
+  },
+  {
+    "id": "ise-03",
+    "category": "IllegalStateException",
+    "trace": "java.lang.IllegalStateException: stream has already been operated upon or closed\n\tat java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:227)\n\tat com.util.Streams.sum(Streams.java:33)",
+    "expectException": "IllegalStateException",
+    "expectContains": ["IllegalStateException", "状态", "非法状态"],
+    "expectFrame": "Streams.java:33"
+  },
+  {
+    "id": "cme-01",
+    "category": "ConcurrentModificationException",
+    "trace": "java.util.ConcurrentModificationException\n\tat java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1013)\n\tat com.coll.Bag.removeWhileIterate(Bag.java:40)\n\tat com.coll.BagTest.main(BagTest.java:8)",
+    "expectException": "ConcurrentModificationException",
+    "expectContains": ["ConcurrentModificationException", "并发", "遍历"],
+    "expectFrame": "Bag.java:40"
+  },
+  {
+    "id": "cme-02",
+    "category": "ConcurrentModificationException",
+    "trace": "java.util.ConcurrentModificationException: null\n\tat java.base/java.util.HashMap$HashIterator.nextNode(HashMap.java:1511)\n\tat com.cache.Table.evict(Table.java:62)\n\tat com.cache.TableTest.run(TableTest.java:11)",
+    "expectException": "ConcurrentModificationException",
+    "expectContains": ["ConcurrentModificationException", "并发", "遍历"],
+    "expectFrame": "Table.java:62"
+  },
+  {
+    "id": "cme-03",
+    "category": "ConcurrentModificationException",
+    "trace": "java.util.ConcurrentModificationException\n\tat java.base/java.util.LinkedList$ListItr.next(LinkedList.java:970)\n\tat com.job.Scheduler.tick(Scheduler.java:29)\n\tat com.job.SchedulerTest.main(SchedulerTest.java:6)",
+    "expectException": "ConcurrentModificationException",
+    "expectContains": ["ConcurrentModificationException", "并发", "遍历"],
+    "expectFrame": "Scheduler.java:29"
+  },
+  {
+    "id": "uoe-01",
+    "category": "UnsupportedOperationException",
+    "trace": "java.lang.UnsupportedOperationException\n\tat java.base/java.util.Collections$UnmodifiableList.add(Collections.java:1153)\n\tat com.cfg.Settings.add(Settings.java:51)\n\tat com.cfg.SettingsTest.main(SettingsTest.java:9)",
+    "expectException": "UnsupportedOperationException",
+    "expectContains": ["UnsupportedOperationException", "不支持", "未实现"],
+    "expectFrame": "Settings.java:51"
+  },
+  {
+    "id": "uoe-02",
+    "category": "UnsupportedOperationException",
+    "trace": "java.lang.UnsupportedOperationException: remove\n\tat java.base/java.util.AbstractList.remove(AbstractList.java:307)\n\tat com.util.ImmutableList.drop(ImmutableList.java:22)\n\tat com.util.ImmutableListTest.run(ImmutableListTest.java:5)",
+    "expectException": "UnsupportedOperationException",
+    "expectContains": ["UnsupportedOperationException", "不支持", "未实现"],
+    "expectFrame": "ImmutableList.java:22"
+  },
+  {
+    "id": "sql-01",
+    "category": "SQLException",
+    "trace": "java.sql.SQLException: No suitable driver found for jdbc:mysql://localhost/db\n\tat java.sql/java.sql.DriverManager.getConnection(DriverManager.java:702)\n\tat com.db.Connector.open(Connector.java:34)\n\tat com.db.ConnectorTest.main(ConnectorTest.java:7)",
+    "expectException": "SQLException",
+    "expectContains": ["SQLException", "SQL", "数据库"],
+    "expectFrame": "Connector.java:34"
+  },
+  {
+    "id": "sql-02",
+    "category": "SQLIntegrityConstraintViolationException",
+    "trace": "java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '101' for key 'PRIMARY'\n\tat com.mysql.cj.jdbc.StatementImpl.executeUpdate(StatementImpl.java:1170)\n\tat com.db.UserDao.insert(UserDao.java:58)\n\tat com.db.UserDaoTest.main(UserDaoTest.java:12)",
+    "expectException": "SQLIntegrityConstraintViolationException",
+    "expectContains": ["SQLIntegrityConstraintViolationException", "SQL", "主键"],
+    "expectFrame": "UserDao.java:58"
+  },
+  {
+    "id": "sql-03",
+    "category": "SQLException",
+    "trace": "java.sql.SQLException: Communications link failure\n\tat com.mysql.cj.jdbc.ConnectionImpl.connect(ConnectionImpl.java:816)\n\tat com.db.Pool.borrow(Pool.java:44)\n\tat com.db.PoolTest.run(PoolTest.java:9)",
+    "expectException": "SQLException",
+    "expectContains": ["SQLException", "SQL", "连接"],
+    "expectFrame": "Pool.java:44"
+  },
+  {
+    "id": "io-01",
+    "category": "FileNotFoundException",
+    "trace": "java.io.FileNotFoundException: /data/config.yaml (No such file or directory)\n\tat java.base/java.io.FileInputStream.open0(Native Method)\n\tat com.cfg.Loader.read(Loader.java:26)\n\tat com.cfg.Loader.main(Loader.java:8)",
+    "expectException": "FileNotFoundException",
+    "expectContains": ["FileNotFoundException", "文件", "路径"],
+    "expectFrame": "Loader.java:26"
+  },
+  {
+    "id": "io-02",
+    "category": "IOException",
+    "trace": "java.io.IOException: Stream closed\n\tat java.base/java.io.BufferedReader.ensureOpen(BufferedReader.java:122)\n\tat com.io.LineReader.next(LineReader.java:39)\n\tat com.io.LineReaderTest.main(LineReaderTest.java:7)",
+    "expectException": "IOException",
+    "expectContains": ["IOException", "IO", "流"],
+    "expectFrame": "LineReader.java:39"
+  },
+  {
+    "id": "io-03",
+    "category": "IOException",
+    "trace": "java.io.IOException: Broken pipe\n\tat java.base/sun.nio.ch.SocketDispatcher.write(SocketDispatcher.java:62)\n\tat com.net.Responder.flush(Responder.java:71)\n\tat com.net.ResponderTest.run(ResponderTest.java:10)",
+    "expectException": "IOException",
+    "expectContains": ["IOException", "IO", "连接"],
+    "expectFrame": "Responder.java:71"
+  },
+  {
+    "id": "nse-01",
+    "category": "NoSuchElementException",
+    "trace": "java.util.NoSuchElementException: No value present\n\tat java.base/java.util.Optional.get(Optional.java:143)\n\tat com.app.Config.getHost(Config.java:47)\n\tat com.app.ConfigTest.main(ConfigTest.java:9)",
+    "expectException": "NoSuchElementException",
+    "expectContains": ["NoSuchElementException", "Optional", "空"],
+    "expectFrame": "Config.java:47"
+  },
+  {
+    "id": "nse-02",
+    "category": "NoSuchElementException",
+    "trace": "java.util.NoSuchElementException\n\tat java.base/java.util.LinkedHashMap$LinkedHashIterator.next(LinkedHashMap.java:729)\n\tat com.coll.Queue.poll(Queue.java:33)\n\tat com.coll.QueueTest.main(QueueTest.java:6)",
+    "expectException": "NoSuchElementException",
+    "expectContains": ["NoSuchElementException", "元素", "空"],
+    "expectFrame": "Queue.java:33"
+  },
+  {
+    "id": "soe-01",
+    "category": "StackOverflowError",
+    "trace": "java.lang.StackOverflowError\n\tat com.rec.Fib.compute(Fib.java:9)\n\tat com.rec.Fib.compute(Fib.java:9)\n\tat com.rec.Fib.main(Fib.java:15)",
+    "expectException": "StackOverflowError",
+    "expectContains": ["StackOverflowError", "栈溢出", "递归"],
+    "expectFrame": "Fib.java:9"
+  },
+  {
+    "id": "soe-02",
+    "category": "StackOverflowError",
+    "trace": "java.lang.StackOverflowError\n\tat com.tree.Node.toString(Node.java:21)\n\tat com.tree.Node.toString(Node.java:21)\n\tat com.tree.NodeTest.main(NodeTest.java:8)",
+    "expectException": "StackOverflowError",
+    "expectContains": ["StackOverflowError", "栈溢出", "递归"],
+    "expectFrame": "Node.java:21"
+  },
+  {
+    "id": "oom-01",
+    "category": "OutOfMemoryError",
+    "trace": "java.lang.OutOfMemoryError: Java heap space\n\tat com.mem.Cache.put(Cache.java:27)\n\tat com.mem.CacheTest.fill(CacheTest.java:14)",
+    "expectException": "OutOfMemoryError",
+    "expectContains": ["OutOfMemoryError", "内存", "堆"],
+    "expectFrame": "Cache.java:27"
+  },
+  {
+    "id": "oom-02",
+    "category": "OutOfMemoryError",
+    "trace": "java.lang.OutOfMemoryError: GC overhead limit exceeded\n\tat com.gen.Report.build(Report.java:63)\n\tat com.gen.ReportTest.main(ReportTest.java:9)",
+    "expectException": "OutOfMemoryError",
+    "expectContains": ["OutOfMemoryError", "内存", "GC"],
+    "expectFrame": "Report.java:63"
+  },
+  {
+    "id": "json-01",
+    "category": "JsonProcessingException",
+    "trace": "com.fasterxml.jackson.core.JsonProcessingException: Unrecognized field \"age\"\n\tat com.fasterxml.jackson.databind.DeserializationContext.reportUnknownProperty(DeserializationContext.java:1124)\n\tat com.api.PersonCodec.decode(PersonCodec.java:38)\n\tat com.api.PersonCodecTest.main(PersonCodecTest.java:7)",
+    "expectException": "JsonProcessingException",
+    "expectContains": ["JsonProcessingException", "JSON", "解析"],
+    "expectFrame": "PersonCodec.java:38"
+  },
+  {
+    "id": "json-02",
+    "category": "JsonParseException",
+    "trace": "com.fasterxml.jackson.core.JsonParseException: Unexpected end-of-input at [Source: (String)\"{]\"; line: 1, column: 3\n\tat com.fasterxml.jackson.core.JsonParser._constructError(JsonParser.java:2391)\n\tat com.api.PayloadCodec.parse(PayloadCodec.java:25)\n\tat com.api.PayloadCodecTest.run(PayloadCodecTest.java:6)",
+    "expectException": "JsonParseException",
+    "expectContains": ["JsonParseException", "JSON", "格式"],
+    "expectFrame": "PayloadCodec.java:25"
+  },
+  {
+    "id": "ie-01",
+    "category": "InterruptedException",
+    "trace": "java.lang.InterruptedException\n\tat java.base/java.lang.Object.wait(Native Method)\n\tat com.worker.Task.await(Task.java:54)\n\tat com.worker.TaskTest.main(TaskTest.java:11)",
+    "expectException": "InterruptedException",
+    "expectContains": ["InterruptedException", "线程", "中断"],
+    "expectFrame": "Task.java:54"
+  },
+  {
+    "id": "ie-02",
+    "category": "InterruptedException",
+    "trace": "java.lang.InterruptedException: sleep interrupted\n\tat java.base/java.lang.Thread.sleep(Thread.java:340)\n\tat com.batch.Job.run(Job.java:33)\n\tat com.batch.JobTest.main(JobTest.java:8)",
+    "expectException": "InterruptedException",
+    "expectContains": ["InterruptedException", "线程", "中断"],
+    "expectFrame": "Job.java:33"
+  },
+  {
+    "id": "toe-01",
+    "category": "TimeoutException",
+    "trace": "java.util.concurrent.TimeoutException: null\n\tat java.base/java.util.concurrent.CompletableFuture.timedGet(CompletableFuture.java:1950)\n\tat com.async.Client.get(Client.java:61)\n\tat com.async.ClientTest.main(ClientTest.java:12)",
+    "expectException": "TimeoutException",
+    "expectContains": ["TimeoutException", "超时", "等待"],
+    "expectFrame": "Client.java:61"
+  },
+  {
+    "id": "toe-02",
+    "category": "TimeoutException",
+    "trace": "java.util.concurrent.TimeoutException: Request did not complete in 5000 ms\n\tat com.net.Http.waitFor(Http.java:88)\n\tat com.net.HttpTest.run(HttpTest.java:9)",
+    "expectException": "TimeoutException",
+    "expectContains": ["TimeoutException", "超时", "等待"],
+    "expectFrame": "Http.java:88"
+  },
+  {
+    "id": "net-01",
+    "category": "ConnectException",
+    "trace": "java.net.ConnectException: Connection refused (Connection refused)\n\tat java.base/sun.nio.ch.SocketChannelImpl.checkConnect(SocketChannelImpl.java:817)\n\tat com.net.Dialer.connect(Dialer.java:46)\n\tat com.net.DialerTest.main(DialerTest.java:7)",
+    "expectException": "ConnectException",
+    "expectContains": ["ConnectException", "连接", "网络"],
+    "expectFrame": "Dialer.java:46"
+  },
+  {
+    "id": "net-02",
+    "category": "UnknownHostException",
+    "trace": "java.net.UnknownHostException: api.example.com\n\tat java.base/java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:229)\n\tat com.net.Resolver.resolve(Resolver.java:39)\n\tat com.net.ResolverTest.run(ResolverTest.java:8)",
+    "expectException": "UnknownHostException",
+    "expectContains": ["UnknownHostException", "主机", "网络"],
+    "expectFrame": "Resolver.java:39"
+  }
+]

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 研发助手 · 异常诊断</title>
+<style>
+  :root { --bg:#0f1419; --card:#1a2230; --accent:#4f9cff; --txt:#e6edf3; --mut:#8b98a8; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:-apple-system,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
+         background:var(--bg); color:var(--txt); min-height:100vh; }
+  header { padding:18px 24px; border-bottom:1px solid #233; display:flex; align-items:center; gap:10px; }
+  header h1 { font-size:18px; margin:0; font-weight:600; }
+  header .tag { font-size:12px; color:var(--mut); border:1px solid #2a3344; padding:2px 8px; border-radius:10px; }
+  main { max-width:860px; margin:24px auto; padding:0 16px; display:flex; flex-direction:column; gap:14px; }
+  textarea { width:100%; min-height:200px; background:var(--card); color:var(--txt); border:1px solid #2a3344;
+             border-radius:10px; padding:14px; font-family:"SFMono-Regular",Consolas,monospace; font-size:13px; resize:vertical; }
+  .row { display:flex; gap:10px; align-items:center; }
+  button { background:var(--accent); color:#fff; border:none; padding:10px 20px; border-radius:8px;
+           font-size:14px; cursor:pointer; font-weight:600; }
+  button:disabled { opacity:.5; cursor:not-allowed; }
+  .status { font-size:13px; color:var(--mut); }
+  .card { background:var(--card); border:1px solid #2a3344; border-radius:10px; padding:16px; }
+  .card h3 { margin:0 0 8px; font-size:14px; color:var(--accent); }
+  pre { white-space:pre-wrap; word-break:break-word; margin:0; font-size:13px; line-height:1.6; }
+  .meta { display:grid; grid-template-columns:auto 1fr; gap:6px 14px; font-size:13px; }
+  .meta b { color:var(--mut); font-weight:500; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🛠 AI 研发助手</h1>
+  <span class="tag">Java 异常智能诊断 · 本地化</span>
+</header>
+<main>
+  <textarea id="trace" placeholder="在此粘贴 Java 异常堆栈（支持多行 at ... 调用栈）..."></textarea>
+  <div class="row">
+    <button id="btn">诊断</button>
+    <span class="status" id="status"></span>
+  </div>
+  <div class="card" id="out" style="display:none">
+    <h3>诊断结果</h3>
+    <div class="meta">
+      <b>异常类型</b><span id="r-type"></span>
+      <b>异常信息</b><span id="r-msg"></span>
+      <b>关键帧</b><span id="r-frame"></span>
+      <b>业务包</b><span id="r-pkg"></span>
+      <b>状态</b><span id="r-note"></span>
+    </div>
+    <h3 style="margin-top:14px">诊断结论（Agent + LLM）</h3>
+    <pre id="r-diagnosis"></pre>
+    <h3 style="margin-top:14px">Agent 工具调用轨迹</h3>
+    <pre id="r-trace" style="color:var(--mut);font-size:12px;"></pre>
+    <h3 style="margin-top:14px">组装给 LLM 的 Prompt</h3>
+    <pre id="r-prompt"></pre>
+  </div>
+</main>
+<script>
+  const btn = document.getElementById('btn');
+  const status = document.getElementById('status');
+  const out = document.getElementById('out');
+  btn.addEventListener('click', async () => {
+    const trace = document.getElementById('trace').value;
+    if (!trace.trim()) { status.textContent = '请先粘贴异常堆栈'; return; }
+    btn.disabled = true; status.textContent = '诊断中...';
+    try {
+      const resp = await fetch('/api/diagnose', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ trace })
+      });
+      const d = await resp.json();
+      document.getElementById('r-type').textContent = d.exceptionType || '-';
+      document.getElementById('r-msg').textContent = d.message || '-';
+      document.getElementById('r-frame').textContent = d.rootFrame || '-';
+      document.getElementById('r-pkg').textContent = d.packageHint || '-';
+      document.getElementById('r-note').textContent = d.note || '-';
+      document.getElementById('r-diagnosis').textContent = d.diagnosis
+          || '（未返回诊断结论，请检查 LLM 密钥 / 网络）';
+      document.getElementById('r-trace').textContent =
+          (d.toolTrace && d.toolTrace.length) ? d.toolTrace.join('\n') : '（Agent 未触发工具调用）';
+      document.getElementById('r-prompt').textContent = d.builtPrompt || '';
+      out.style.display = 'block';
+      status.textContent = '完成';
+    } catch (e) {
+      status.textContent = '请求失败：' + e.message;
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
