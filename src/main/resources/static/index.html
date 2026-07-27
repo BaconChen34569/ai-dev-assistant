@@ -38,6 +38,21 @@
     <button id="btn">诊断</button>
     <span class="status" id="status"></span>
   </div>
+
+  <div class="card">
+    <h3>项目配置 · RAG 索引</h3>
+    <div class="row">
+      <input id="codebase" placeholder="本地 Java 项目绝对路径，如 D:/myProject" style="flex:1;padding:9px 12px;background:#0f1419;color:var(--txt);border:1px solid #2a3344;border-radius:8px;">
+      <button id="btn-index">建立索引</button>
+    </div>
+    <div class="row" style="margin-top:10px">
+      <input id="searchQ" placeholder="检索测试关键字，如 NullPointerException" style="flex:1;padding:9px 12px;background:#0f1419;color:var(--txt);border:1px solid #2a3344;border-radius:8px;">
+      <button id="btn-search">测试检索</button>
+    </div>
+    <div class="status" id="rag-status" style="margin-top:8px"></div>
+    <pre id="rag-result" style="margin-top:8px;color:var(--mut);font-size:12px;white-space:pre-wrap"></pre>
+  </div>
+
   <div class="card" id="out" style="display:none">
     <h3>诊断结果</h3>
     <div class="meta">
@@ -87,6 +102,62 @@
     } finally {
       btn.disabled = false;
     }
+  });
+
+  const codebase = document.getElementById('codebase');
+  const btnIndex = document.getElementById('btn-index');
+  const searchQ = document.getElementById('searchQ');
+  const btnSearch = document.getElementById('btn-search');
+  const ragStatus = document.getElementById('rag-status');
+  const ragResult = document.getElementById('rag-result');
+
+  btnIndex.addEventListener('click', async () => {
+    const path = codebase.value.trim();
+    if (!path) { ragStatus.textContent = '请先填写项目路径'; return; }
+    btnIndex.disabled = true; ragStatus.textContent = '索引中（读代码 + 调 embedding + 写 Redis db2）...';
+    try {
+      const resp = await fetch('/api/rag/index', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ path })
+      });
+      const d = await resp.json();
+      if (d.ok) {
+        ragStatus.textContent = '✅ 索引完成：向 Redis db2 写入 ' + d.indexed + ' 个代码分片';
+        ragResult.textContent = '根目录：' + d.root;
+      } else {
+        ragStatus.textContent = '❌ ' + (d.error || '索引失败');
+        ragResult.textContent = '';
+      }
+    } catch (e) {
+      ragStatus.textContent = '请求失败：' + e.message + '（检查应用是否已启动、REDIS_HOST 是否对齐）';
+      ragResult.textContent = '';
+    } finally { btnIndex.disabled = false; }
+  });
+
+  btnSearch.addEventListener('click', async () => {
+    const q = searchQ.value.trim();
+    if (!q) { ragStatus.textContent = '请填写检索关键字'; return; }
+    btnSearch.disabled = true;
+    try {
+      const resp = await fetch('/api/rag/search?q=' + encodeURIComponent(q) + '&topK=3');
+      const arr = await resp.json();
+      if (Array.isArray(arr) && arr.length) {
+        ragStatus.textContent = '✅ Redis 召回 ' + arr.length + ' 个相关分片 —— 向量检索已生效';
+        ragResult.textContent = arr.map(function(c, i) {
+          const sc = c.chunk || c;
+          const fp = sc.filePath || (sc.chunk && sc.chunk.filePath) || '-';
+          const content = (sc.content || (sc.chunk && sc.chunk.content) || '');
+          const score = (typeof c.score === 'number') ? c.score.toFixed(3) : '-';
+          return '[' + (i + 1) + '] ' + fp + '  score=' + score + '\n' + content.slice(0, 240);
+        }).join('\n\n');
+      } else {
+        ragStatus.textContent = '⚠️ 检索返回空：Redis db2 尚无数据，请先点「建立索引」';
+        ragResult.textContent = '';
+      }
+    } catch (e) {
+      ragStatus.textContent = '请求失败：' + e.message;
+      ragResult.textContent = '';
+    } finally { btnSearch.disabled = false; }
   });
 </script>
 </body>
